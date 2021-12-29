@@ -7,7 +7,7 @@ LOCAL_MODULE := liblive556
 LOCAL_ARM_MODE := arm
 LOCAL_PRELINK_MODULE := false
 
-LOCAL_LDLIBS    := -lm -llog 
+LOCAL_LDLIBS := -lm -llog
 
 #cpp flags?
 LOCAL_CPPFLAGS := \
@@ -24,9 +24,11 @@ LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/liveMedia/include \
 	$(LOCAL_PATH)/UsageEnvironment \
 	$(LOCAL_PATH)/UsageEnvironment/include \
-	$(LOCAL_PATH)/MkTranscode \
+	$(LOCAL_PATH)/MkTranscoder \
 
 LOCAL_MODULE_TAGS := optional
+# LOCAL_PROPRIETARY_MODULE := true
+# LOCAL_MODULE_RELATIVE_PATH := hw
 
 #build the needed source file
 LOCAL_SRC_FILES := \
@@ -218,52 +220,54 @@ liveMedia/WAVAudioFileSource.cpp \
 UsageEnvironment/HashTable.cpp \
 UsageEnvironment/strDup.cpp \
 UsageEnvironment/UsageEnvironment.cpp \
-MkTranscode/live555MediaServer.cpp \
-MkTranscode/DynamicRTSPServer.cpp \
-MkTranscode/ByteStreamLiveSource.cpp \
-MkTranscode/MPEG2TransportLiveServerMediaSubsession.cpp \
-MkTranscode/ringbuffer.cpp
+MkTranscoder/live555MediaServer.cpp \
+MkTranscoder/DynamicRTSPServer.cpp \
+MkTranscoder/ByteStreamLiveSource.cpp \
+MkTranscoder/MPEG2TransportLiveServerMediaSubsession.cpp \
+MkTranscoder/ringbuffer.cpp
 
 include $(BUILD_SHARED_LIBRARY)
 
 # ---------------------------------
 
-# include $(CLEAR_VARS)
+include $(CLEAR_VARS)
 
-# LOCAL_MODULE := live555MediaServer
+LOCAL_MODULE := live555MediaServer
 
-# LOCAL_ARM_MODE := arm
-# LOCAL_PRELINK_MODULE := false
+LOCAL_ARM_MODE := arm
+LOCAL_PRELINK_MODULE := false
 
-# LOCAL_LDLIBS    := -lm -llog 
+LOCAL_LDLIBS := -lm -llog
 
-# #cpp flags?
-# LOCAL_CPPFLAGS := \
-# -DSOCKLEN_T=socklen_t -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64 -DBSD=1 -DNO_OPENSSL -fexceptions -D__ANDROID_NDK__
+#cpp flags?
+LOCAL_CPPFLAGS := \
+-DSOCKLEN_T=socklen_t -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64 -DBSD=1 -DNO_OPENSSL -fexceptions -D__ANDROID_NDK__
 
-# #include header
-# LOCAL_C_INCLUDES := \
-# 	$(LOCAL_PATH) \
-# 	$(LOCAL_PATH)/BasicUsageEnvironment \
-# 	$(LOCAL_PATH)/BasicUsageEnvironment/include \
-# 	$(LOCAL_PATH)/groupsock \
-# 	$(LOCAL_PATH)/groupsock/include \
-# 	$(LOCAL_PATH)/liveMedia \
-# 	$(LOCAL_PATH)/liveMedia/include \
-# 	$(LOCAL_PATH)/UsageEnvironment \
-# 	$(LOCAL_PATH)/UsageEnvironment/include \
-# 	$(LOCAL_PATH)/MkTranscode \
+#include header
+LOCAL_C_INCLUDES := \
+	$(LOCAL_PATH) \
+	$(LOCAL_PATH)/BasicUsageEnvironment \
+	$(LOCAL_PATH)/BasicUsageEnvironment/include \
+	$(LOCAL_PATH)/groupsock \
+	$(LOCAL_PATH)/groupsock/include \
+	$(LOCAL_PATH)/liveMedia \
+	$(LOCAL_PATH)/liveMedia/include \
+	$(LOCAL_PATH)/UsageEnvironment \
+	$(LOCAL_PATH)/UsageEnvironment/include \
+	$(LOCAL_PATH)/MkTranscoder \
 
-# LOCAL_MODULE_TAGS := optional
-# LOCAL_SHARED_LIBRARIES := \
-# 					liblive556
-					
-# #build the needed source file
-# LOCAL_SRC_FILES := \
-# MkTranscode/live555MediaServer.cpp \
-# MkTranscode/DynamicRTSPServer.cpp \
-# MkTranscode/ByteStreamLiveSource.cpp \
-# MkTranscode/MPEG2TransportLiveServerMediaSubsession.cpp \
-# MkTranscode/ringbuffer.cpp
+LOCAL_MODULE_TAGS := optional
+# LOCAL_PROPRIETARY_MODULE := true
+# LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_SHARED_LIBRARIES := \
+	liblive556
 
-# include $(BUILD_EXECUTABLE)
+#build the needed source file
+LOCAL_SRC_FILES := \
+MkTranscoder/live555MediaServer.cpp \
+MkTranscoder/DynamicRTSPServer.cpp \
+MkTranscoder/ByteStreamLiveSource.cpp \
+MkTranscoder/MPEG2TransportLiveServerMediaSubsession.cpp \
+MkTranscoder/ringbuffer.cpp
+
+include $(BUILD_EXECUTABLE)
